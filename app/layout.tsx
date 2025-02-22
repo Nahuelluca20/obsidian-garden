@@ -1,12 +1,10 @@
 import type React from "react";
 import "./globals.css";
-import { Inter } from "next/font/google";
-import Sidebar from "@/components/sidebar";
-import RightSidebar from "@/components/right-sidebar";
-import MobileNav from "@/components/mobile-nav";
+import { GeistSans } from "geist/font/sans";
+import { Navigation } from "@/components/navigation";
 import { ThemeProvider } from "next-themes";
 
-const inter = Inter({ subsets: ["latin"] });
+const geist = GeistSans.className;
 
 export const metadata = {
   title: "Digital Garden",
@@ -20,20 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${geist} antialiased bg-[#FFFCF4] dark:bg-zinc-900`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col md:flex-row min-h-screen bg-background">
-            <Sidebar />
-            <main className="flex-1 border-x border-border px-4 py-6 md:px-8 min-h-screen">
-              <MobileNav />
-              {children}
-            </main>
-            <RightSidebar />
+          <div className="max-w-2xl mx-auto px-6 py-12">
+            <Navigation />
+            {children}
           </div>
         </ThemeProvider>
       </body>

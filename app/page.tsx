@@ -1,61 +1,90 @@
+import { BlogPosts } from "@/components/blog-posts";
+import Link from "next/link";
+
 export default function Home() {
+  const topics = [
+    "advice",
+    "ai",
+    "competition",
+    "defaults",
+    "design",
+    "empathy",
+    "evergreen",
+    "friendship",
+    "habits",
+    "hardware",
+    "humanism",
+    "ideas",
+    "learning",
+    "leverage",
+    "love",
+    "manufacturing",
+    "media",
+    "minimalism",
+    "money",
+    "obsidian",
+    "packaging",
+    "perfectionism",
+    "popular",
+    "rituals",
+    "startups",
+    "synthography",
+    "teaching",
+    "tools",
+    "writing",
+  ];
+
   return (
-    <div className="max-w-3xl mx-auto">
-      <header className="flex items-center gap-4 mb-8">
-        <div>
-          <h1 className="text-xl md:text-2xl font-bold">🚀 loadertsx</h1>
-          <p className="text-xs md:text-sm text-muted-foreground">
-            Jan 01, 2025 · 1 min read
-          </p>
-        </div>
-      </header>
-
-      <article className="prose dark:prose-invert max-w-none">
-        <p className="text-base md:text-lg mb-6">
-          Hello, I am Loader. Frontend Engineer passionate about creating
-          products. I'm also an artificial intelligence enthusiast and I'm
-          learning about it. You can find what I'm learning about it on this
-          website and on my{" "}
-          <a href="#" className="font-medium no-underline hover:underline">
-            blog
-          </a>
-          .
-        </p>
-
-        <p className="text-sm md:text-base text-muted-foreground mb-6">
-          In this space I will write about things I learn and want to share.
-        </p>
-
-        <h2 className="text-lg md:text-xl font-semibold mt-8 mb-4">
-          As a brief overview:
-        </h2>
-
-        <ul className="space-y-2 list-none pl-0">
-          {[
-            "Books I Read",
-            "Docker Helps",
-            "Retrieval-Augmented Generation",
-          ].map((item) => (
-            <li
-              key={item}
-              className="flex items-center gap-2 text-sm md:text-base"
+    <div className="space-y-16">
+      {/* <section>
+        <h2 className="text-xl mb-8">Latest</h2>
+        <article>
+          <h3 className="text-xl font-medium mb-2">
+            <Link
+              href="/posts/self-guaranteeing-promises"
+              className="hover:underline"
             >
-              <span className="w-1 h-1 bg-foreground rounded-full"></span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </article>
+              Self-guaranteeing promises
+            </Link>
+          </h3>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-2">
+            December 3, 2024 · 1 minute read
+          </p>
+          <p className="text-zinc-600 dark:text-zinc-400">
+            A self-guaranteeing promise does not require you to trust anyone.
+            You can verify it yourself.{" "}
+            <Link
+              href="/posts/self-guaranteeing-promises"
+              className="text-zinc-900 dark:text-zinc-200 hover:underline"
+            >
+              Keep reading →
+            </Link>
+          </p>
+        </article>
+      </section>
 
-      <footer className="mt-16 pt-8 border-t border-border text-xs md:text-sm text-muted-foreground">
-        <p className="mb-2">Created with Quartz v4.4.0 © 2025</p>
-        <a
-          href="https://github.com"
-          className="text-foreground hover:underline"
-        >
-          GitHub
-        </a>
-      </footer>
+      <section>
+        <h2 className="text-xl mb-8">Topics</h2>
+        <div className="flex flex-wrap gap-x-1 gap-y-2">
+          {topics.map((topic) => (
+            <Link
+              key={topic}
+              href={`/topics/${topic}`}
+              className="hover:underline text-zinc-900 dark:text-zinc-200"
+            >
+              {topic}
+              {topic !== topics[topics.length - 1] && (
+                <span className="text-zinc-400">,</span>
+              )}
+            </Link>
+          ))}
+        </div>
+      </section> */}
+
+      <section>
+        <h2 className="text-xl mb-8">Writing</h2>
+        <BlogPosts />
+      </section>
     </div>
   );
 }
