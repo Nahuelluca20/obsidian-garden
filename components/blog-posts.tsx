@@ -12,7 +12,7 @@ export function BlogPosts() {
             {post.metadata.publishedAt}
           </span>
           <Link
-            href={`/posts/${post.slug}`}
+            href={`/post/${post.folderPath}/${post.slug}`}
             className="text-zinc-900 dark:text-zinc-200 hover:underline"
           >
             {post.metadata.title}
