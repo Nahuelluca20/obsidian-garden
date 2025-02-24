@@ -2,10 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
 import { remarkObsidianImages } from "@/utlis/blog-utils";
 import { format, parseISO } from "date-fns";
-import MdxComponent from "@/components/mdx";
+import { MarkdownView } from "@/components/mdx-components/markdow-view";
+import { markdownParser } from "@/utlis/mdx-parser";
+import "@/styles/prism.css";
 
 export async function generateStaticParams() {
   const rootDir = path.join(process.cwd(), "content");
@@ -72,9 +73,9 @@ export default async function Post({
 
   const processedContent = await remark()
     .use(remarkObsidianImages)
-    .use(html)
     .process(content);
-  const contentHtml = processedContent.toString();
+
+  const parsedContent = markdownParser(processedContent.value.toString());
 
   const date = parseISO(frontmatter.publishedAt);
   const formatDate = format(date, "MMMM d, yyyy");
@@ -86,7 +87,15 @@ export default async function Post({
           <h1 className="text-3xl font-normal mb-2">{frontmatter.title}</h1>
           <p className="text-zinc-600 dark:text-zinc-400">{formatDate}</p>
         </header>
-        <MdxComponent contentHtml={contentHtml} />
+        {/* <MdxComponent contentHtml={contentHtml} /> */}
+        <div
+          className="prose dark:prose-invert prose-neutral max-w-none
+          prose-a:text-zinc-900 prose-a:dark:text-zinc-100 prose-a:underline
+          prose-p:text-zinc-800 prose-p:dark:text-zinc-200
+          prose-headings:font-normal prose-headings:text-zinc-900 prose-headings:dark:text-zinc-100"
+        >
+          <MarkdownView content={parsedContent} />
+        </div>
       </article>
     </>
   );

@@ -8,7 +8,7 @@ export function Navigation() {
         href="/"
         className="text-xl text-emerald-700 dark:text-emerald-400 hover:underline"
       >
-        Your Name
+        Loader.tsx
       </Link>
       <div className="flex items-center gap-6">
         <Link
