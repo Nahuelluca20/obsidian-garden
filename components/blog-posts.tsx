@@ -1,7 +1,7 @@
 import { getBlogPosts } from "@/utlis/blog-utils";
 import Link from "next/link";
 
-export function BlogPosts() {
+export function BlogPosts({ topic }: { topic: string }) {
   const allBlogs = getBlogPosts();
 
   const sortedBlogs = allBlogs.sort(
@@ -10,9 +10,14 @@ export function BlogPosts() {
       new Date(a.metadata.publishedAt).getTime(),
   );
 
+  const filteredBlogs = topic
+    ? sortedBlogs.filter((post) =>
+        post.metadata.tags.toLowerCase().includes(topic.toLowerCase()),
+      )
+    : sortedBlogs;
   return (
     <div className="space-y-3">
-      {sortedBlogs.map((post) => (
+      {filteredBlogs.map((post) => (
         <div key={post.slug} className="flex gap-6">
           <span className="text-zinc-400 shrink-0 w-24">
             {post.metadata.publishedAt}
