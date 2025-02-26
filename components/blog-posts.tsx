@@ -1,18 +1,18 @@
 import { getBlogPosts } from "@/utlis/blog-utils";
 import Link from "next/link";
 
-export function BlogPosts({ topic }: { topic: string }) {
+export function BlogPosts({ topic }: Readonly<{ topic: string }>) {
   const allBlogs = getBlogPosts();
 
-  const sortedBlogs = allBlogs.sort(
+  const sortedBlogs = allBlogs.toSorted(
     (a, b) =>
       new Date(b.metadata.publishedAt).getTime() -
-      new Date(a.metadata.publishedAt).getTime(),
+      new Date(a.metadata.publishedAt).getTime()
   );
 
   const filteredBlogs = topic
     ? sortedBlogs.filter((post) =>
-        post.metadata.tags.toLowerCase().includes(topic.toLowerCase()),
+        post.metadata.tags.toLowerCase().includes(topic.toLowerCase())
       )
     : sortedBlogs;
   return (

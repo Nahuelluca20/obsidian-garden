@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 
     segments[segments.length - 1] = segments[segments.length - 1].replace(
       /\.mdx?$/,
-      "",
+      ""
     );
     return { slug: segments };
   });
@@ -62,9 +62,9 @@ export async function generateMetadata({
 
 export default async function Post({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ slug: string[] }>;
-}) {
+}>) {
   const { slug } = await params;
   const decodedSlug = slug.map((segment) => decodeURIComponent(segment));
   const postPath = `${path.join(process.cwd(), "content", ...decodedSlug)}.mdx`;
@@ -81,22 +81,19 @@ export default async function Post({
   const formatDate = format(date, "MMMM d, yyyy");
 
   return (
-    <>
-      <article className="max-w-4xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-normal mb-2">{frontmatter.title}</h1>
-          <p className="text-zinc-600 dark:text-zinc-400">{formatDate}</p>
-        </header>
-        {/* <MdxComponent contentHtml={contentHtml} /> */}
-        <div
-          className="prose dark:prose-invert prose-neutral max-w-none
+    <article className="max-w-4xl mx-auto">
+      <header className="mb-8">
+        <h1 className="text-3xl font-normal mb-2">{frontmatter.title}</h1>
+        <p className="text-zinc-600 dark:text-zinc-400">{formatDate}</p>
+      </header>
+      <div
+        className="prose dark:prose-invert prose-neutral max-w-none
           prose-a:text-zinc-900 prose-a:dark:text-zinc-100 prose-a:underline
           prose-p:text-zinc-800 prose-p:dark:text-zinc-200
           prose-headings:font-normal prose-headings:text-zinc-900 prose-headings:dark:text-zinc-100"
-        >
-          <MarkdownView content={parsedContent} />
-        </div>
-      </article>
-    </>
+      >
+        <MarkdownView content={parsedContent} />
+      </div>
+    </article>
   );
 }

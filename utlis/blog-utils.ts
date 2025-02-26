@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { Root } from "postcss";
 import { visit } from "unist-util-visit";
 
 type Metadata = {
@@ -7,6 +8,7 @@ type Metadata = {
   publishedAt: string;
   summary: string;
   image?: string;
+  tags: string;
 };
 
 function parseFrontmatter(fileContent: string) {
@@ -66,7 +68,7 @@ function getMDXData(rootDir: string) {
     const { metadata, content } = readMDXFile(absoluteFilePath);
     const slug = path.basename(
       absoluteFilePath,
-      path.extname(absoluteFilePath),
+      path.extname(absoluteFilePath)
     );
 
     const relativePath = path.relative(rootDir, absoluteFilePath);
@@ -124,51 +126,59 @@ export function formatDate(date: string, includeRelative = false) {
 }
 
 export function remarkObsidianImages() {
-  return (tree: any) => {
-    visit(tree, "text", (node: any, index: number, parent: any) => {
-      if (!node.value) return;
+  return (tree: Root) => {
+    visit(
+      tree,
+      "text",
+      (node: { value?: string }, index: number | undefined, parent) => {
+        if (!node.value) return;
 
-      const imageRegex = /!\[\[([^\]]+)\]\]/g;
-      let match;
-      const newNodes = [];
-      let lastIndex = 0;
+        const imageRegex = /!\[\[([^\]]+)\]\]/g;
+        let match: RegExpExecArray | null;
+        const newNodes = [];
+        let lastIndex = 0;
 
-      while ((match = imageRegex.exec(node.value)) !== null) {
-        const start = match.index;
-        const end = imageRegex.lastIndex;
+        while ((match = imageRegex.exec(node.value)) !== null) {
+          const start = match.index;
+          const end = imageRegex.lastIndex;
 
-        if (start > lastIndex) {
+          if (start > lastIndex) {
+            newNodes.push({
+              type: "text",
+              value: node.value.slice(lastIndex, start),
+            });
+          }
+
+          const imageData = match[1].trim();
+          const [filePath, altTextRaw] = imageData
+            .split("|")
+            .map((s) => s.trim());
+          const altText = altTextRaw || filePath;
+
           newNodes.push({
-            type: "text",
-            value: node.value.slice(lastIndex, start),
+            type: "image",
+            url: `/attachments/${filePath}`,
+            alt: altText,
           });
+
+          lastIndex = end;
         }
 
-        const imageData = match[1].trim();
-        const [filePath, altTextRaw] = imageData
-          .split("|")
-          .map((s) => s.trim());
-        const altText = altTextRaw || filePath;
-
-        newNodes.push({
-          type: "image",
-          url: `/attachments/${filePath}`,
-          alt: altText,
-        });
-
-        lastIndex = end;
+        if (lastIndex < node.value.length) {
+          newNodes.push({
+            type: "text",
+            value: node.value.slice(lastIndex),
+          });
+        }
+        if (newNodes.length && parent && typeof index === "number") {
+          // Type assertion to handle the 'never' type error
+          (parent as { children: unknown[] }).children.splice(
+            index,
+            1,
+            ...newNodes
+          );
+        }
       }
-
-      if (lastIndex < node.value.length) {
-        newNodes.push({
-          type: "text",
-          value: node.value.slice(lastIndex),
-        });
-      }
-
-      if (newNodes.length && parent && typeof index === "number") {
-        parent.children.splice(index, 1, ...newNodes);
-      }
-    });
+    );
   };
 }

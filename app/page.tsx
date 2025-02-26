@@ -3,9 +3,9 @@ import { TopicsFilter } from "@/components/topic-filter";
 
 export default async function Home({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+}>) {
   const topics = [
     "advice",
     "ai",
@@ -37,7 +37,7 @@ export default async function Home({
 
       <section>
         <h2 className="text-xl mb-8">Writing</h2>
-        <BlogPosts topic={topic} />
+        <BlogPosts topic={topic as string} />
       </section>
     </div>
   );
