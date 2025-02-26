@@ -126,10 +126,12 @@ The thing we want do is predict who token is the following in the sequence accor
 When the neural network is started the values are random, so through training the values are updated to obtain the correct probability.
 ![[Pasted image 20250221163630.png]]
 
-
-
-
-
+#### Inference 
+This stage generate new data from de model. To generate data the model predicts the next token, one at time. Back in our example we got this:
+```
+4438 -> 10314
+```
+As we saw, the model generates a series of probabilities to know which is the next token.
 
 
 
