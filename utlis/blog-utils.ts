@@ -47,7 +47,7 @@ function getMDXFiles(dir: string): string[] {
     if (entry.isDirectory()) {
       // Llamada recursiva
       results = results.concat(getMDXFiles(fullPath));
-    } else if (entry.isFile() && path.extname(entry.name) === ".mdx") {
+    } else if (entry.isFile() && path.extname(entry.name) === ".md") {
       results.push(fullPath);
     }
   }

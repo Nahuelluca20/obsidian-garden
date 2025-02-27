@@ -18,7 +18,7 @@ export function TopicsFilter({ topics }: TopicsFilterProps) {
   const [filter, setFilter] = useState("");
 
   const filteredTopics = topics.filter((topic) =>
-    topic.toLowerCase().includes(filter.toLowerCase()),
+    topic.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (

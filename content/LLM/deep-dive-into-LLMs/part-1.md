@@ -2,7 +2,8 @@
 title: 'Part 1 - Deep dive into LLMs'
 publishedAt: '2025-02-22'
 summary: 'We will analyze, understand and practice exercises from Andrej Karpathy video on LLMs.'
-tags: [AI, LLM]
+tags:
+  - ai
 ---
 # Introduction
 ---

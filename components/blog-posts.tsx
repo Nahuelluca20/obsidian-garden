@@ -10,11 +10,12 @@ export function BlogPosts({ topic }: Readonly<{ topic: string }>) {
       new Date(a.metadata.publishedAt).getTime()
   );
 
+  console.log(sortedBlogs, topic);
+
   const filteredBlogs = topic
-    ? sortedBlogs.filter((post) =>
-        post.metadata.tags.toLowerCase().includes(topic.toLowerCase())
-      )
+    ? sortedBlogs.filter((post) => `- ${topic}` in post.metadata)
     : sortedBlogs;
+
   return (
     <div className="space-y-3">
       {filteredBlogs.map((post) => (

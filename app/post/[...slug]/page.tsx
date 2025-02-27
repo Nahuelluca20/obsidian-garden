@@ -50,7 +50,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const decodedSlug = slug.map((segment) => decodeURIComponent(segment));
-  const postPath = `${path.join(process.cwd(), "content", ...decodedSlug)}.mdx`;
+  const postPath = `${path.join(process.cwd(), "content", ...decodedSlug)}.md`;
 
   const fileContent = fs.readFileSync(postPath, "utf-8");
   const { data } = matter(fileContent);
@@ -67,7 +67,7 @@ export default async function Post({
 }>) {
   const { slug } = await params;
   const decodedSlug = slug.map((segment) => decodeURIComponent(segment));
-  const postPath = `${path.join(process.cwd(), "content", ...decodedSlug)}.mdx`;
+  const postPath = `${path.join(process.cwd(), "content", ...decodedSlug)}.md`;
   const markdownWithMeta = fs.readFileSync(postPath, "utf-8");
   const { data: frontmatter, content } = matter(markdownWithMeta);
 
