@@ -1,10 +1,10 @@
 ---
-title: 'Create Database Postgres with Docker'
-publishedAt: '2025-02-21'
-summary: 'In the ever-evolving landscape of software development, the debate between dynamic and static typing continues to be a hot topic.'
+title: "Create Database Postgres with Docker"
+publishedAt: "2025-02-21"
+summary: "In the ever-evolving landscape of software development, the debate between dynamic and static typing continues to be a hot topic."
 tags:
   - docker
-  - postgresql
+  - programming
 ---
 
 This command get de last version of postgres
