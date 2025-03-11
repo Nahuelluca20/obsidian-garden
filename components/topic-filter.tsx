@@ -18,7 +18,7 @@ export function TopicsFilter({ topics }: TopicsFilterProps) {
   const [filter, setFilter] = useState("");
 
   const filteredTopics = topics.filter((topic) =>
-    topic.toLowerCase().includes(filter.toLowerCase())
+    topic.toLowerCase().includes(filter.toLowerCase()),
   );
 
   return (
@@ -60,7 +60,7 @@ export function TopicsFilter({ topics }: TopicsFilterProps) {
             >
               <Link
                 href={`${pathname}?topic=${topic}`}
-                className="hover:underline text-zinc-900 dark:text-zinc-200"
+                className="hover:underline text-lg text-zinc-900 dark:text-zinc-200"
               >
                 {topic}
                 {index !== filteredTopics.length - 1 && (

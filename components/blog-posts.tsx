@@ -7,7 +7,7 @@ export function BlogPosts({ topic }: Readonly<{ topic: string }>) {
   const sortedBlogs = allBlogs.toSorted(
     (a, b) =>
       new Date(b.metadata.publishedAt).getTime() -
-      new Date(a.metadata.publishedAt).getTime()
+      new Date(a.metadata.publishedAt).getTime(),
   );
 
   console.log(sortedBlogs, topic);
@@ -25,7 +25,7 @@ export function BlogPosts({ topic }: Readonly<{ topic: string }>) {
           </span>
           <Link
             href={`/post/${post.folderPath}/${post.slug}`}
-            className="text-zinc-900 dark:text-zinc-200 hover:underline"
+            className="text-zinc-900 dark:text-zinc-200 hover:underline text-lg"
           >
             {post.metadata.title}
           </Link>

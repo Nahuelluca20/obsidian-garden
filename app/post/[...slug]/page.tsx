@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 
     segments[segments.length - 1] = segments[segments.length - 1].replace(
       /\.mdx?$/,
-      ""
+      "",
     );
     return { slug: segments };
   });
@@ -87,7 +87,7 @@ export default async function Post({
         <p className="text-zinc-600 dark:text-zinc-400">{formatDate}</p>
       </header>
       <div
-        className="prose dark:prose-invert prose-neutral max-w-none
+        className="prose-lg dark:prose-invert prose-neutral max-w-none
           prose-a:text-zinc-900 prose-a:dark:text-zinc-100 prose-a:underline
           prose-p:text-zinc-800 prose-p:dark:text-zinc-200
           prose-headings:font-normal prose-headings:text-zinc-900 prose-headings:dark:text-zinc-100"
