@@ -1,10 +1,10 @@
 ---
-title: "ch4 - Implementing a GPT model from scratch to generate text"
+title: ch4 - Implementing a GPT model from scratch to generate text
 tags:
   - ai
   - llm
 publishedAt: "2025-03-05"
-summary: "Implementing a GPT model from scratch to generate text"
+summary: Implementing a GPT model from scratch to generate text
 ---
 
 ![[Pasted image 20250305102130.png]]
@@ -568,3 +568,33 @@ Total size of the model: 621.83 MB
 ```
 
 ## Generating Text
+
+In this step the model have to convert de output tensor in text. The model generates a one token at time. With a input context the model generates the next token in the sequence and this new token is appended in for the next iteration.
+
+Right now we know that the output have the shape: `[batch_size, num_token, vocab_size]`
+
+```shell
+input: "Hello, I am a"
+1st iteration: "Hello, I am a Soft"
+2st iteration: "Hello, I am a Software"
+3st iteration: "Hello, I am a Software Developer"
+...
+6st iteration: "Hello, I am a Software Developer with experience in Frontend"
+```
+
+![[Pasted image 20250313153652.png]]
+
+```python
+start_context = "Hello, I am"
+encoded = tokenizer.encode(start_context)
+print("encoded:", encoded)
+encoded_tensor = torch.tensor(encoded).unsqueeze(0)
+print("encoded_tensor.shape:", encoded_tensor.shape)
+```
+
+```shell
+encoded: [15496, 11, 314, 716]
+encoded_tensor.shape: torch.Size([1, 4])
+```
+
+![[Pasted image 20250318190620.png]]
