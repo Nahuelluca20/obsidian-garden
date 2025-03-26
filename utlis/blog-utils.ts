@@ -1,3 +1,4 @@
+import { Article } from "@/types/article";
 import fs from "node:fs";
 import path from "node:path";
 import type { Root } from "postcss";
@@ -87,6 +88,16 @@ function getMDXData(rootDir: string) {
 export function getBlogPosts() {
   const contentDir = path.join(process.cwd(), "content");
   return getMDXData(contentDir);
+}
+
+export function getFirstPost() {
+  const posts = getBlogPosts();
+  const sortedPosts = posts.toSorted(
+    (a, b) =>
+      new Date(b.metadata.publishedAt).getTime() -
+      new Date(a.metadata.publishedAt).getTime()
+  )[0];
+  return sortedPosts;
 }
 
 export function formatDate(date: string, includeRelative = false) {
@@ -181,4 +192,12 @@ export function remarkObsidianImages() {
       }
     );
   };
+}
+
+export function getTags(post: Article) {
+  const topicKeys = Object.keys(post.metadata)
+    .filter((key) => key.trim().startsWith("-"))
+    .map((key) => key.trim().slice(1).trim());
+
+  return topicKeys;
 }

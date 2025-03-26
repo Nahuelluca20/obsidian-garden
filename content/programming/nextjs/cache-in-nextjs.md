@@ -4,7 +4,7 @@ tags:
   - programming
   - web
 publishedAt: "2025-03-24"
-summary: How Cache works in Next.js
+summary: Since the release of Next.js App router developers have had problems and these notes try to clarify the picture.
 ---
 
 Next.js have a different ways to cache data and improve the performance in out applications.

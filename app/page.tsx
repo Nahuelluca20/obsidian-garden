@@ -1,4 +1,5 @@
 import { BlogPosts } from "@/components/blog-posts";
+import { FeaturedArticle } from "@/components/featured-article";
 import { TopicsFilter } from "@/components/topic-filter";
 
 export default async function Home({
@@ -32,12 +33,12 @@ export default async function Home({
   return (
     <div className="space-y-16">
       <section>
-        <h2 className="text-xl mb-8">Topics</h2>
         <TopicsFilter topics={topics} />
       </section>
 
       <section>
         <h2 className="text-xl mb-8">Writing</h2>
+        <FeaturedArticle />
         <BlogPosts topic={topic as string} />
       </section>
     </div>

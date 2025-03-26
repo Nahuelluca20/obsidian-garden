@@ -6,6 +6,7 @@ import { remarkObsidianImages } from "@/utlis/blog-utils";
 import { format, parseISO } from "date-fns";
 import { MarkdownView } from "@/components/mdx-components/markdow-view";
 import { markdownParser } from "@/utlis/mdx-parser";
+import { CalendarIcon } from "lucide-react";
 import "@/styles/prism.css";
 
 export async function generateStaticParams() {
@@ -37,7 +38,7 @@ export async function generateStaticParams() {
 
     segments[segments.length - 1] = segments[segments.length - 1].replace(
       /\.mdx?$/,
-      "",
+      ""
     );
     return { slug: segments };
   });
@@ -81,16 +82,33 @@ export default async function Post({
   const formatDate = format(date, "MMMM d, yyyy");
 
   return (
-    <article className="max-w-4xl mx-auto">
+    <article className="container mx-auto px-4 py-6 max-w-4xl">
       <header className="mb-8">
-        <h1 className="text-3xl font-normal mb-2">{frontmatter.title}</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">{formatDate}</p>
+        <h1 className="text-5xl md:text-7xl font-black font-serif leading-none mb-4">
+          {frontmatter.title}
+        </h1>
+        <div className="flex items-center text-sm text-muted-foreground mb-4">
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          <span>{formatDate}</span>
+        </div>
+        {frontmatter.topics && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {frontmatter.topics.map((topic: string) => (
+              <span
+                key={topic}
+                className="text-xs px-2 py-1 bg-transparent text-black dark:text-white border border-black dark:border-white rounded-sm"
+              >
+                {topic}
+              </span>
+            ))}
+          </div>
+        )}
       </header>
       <div
         className="prose-lg dark:prose-invert prose-neutral max-w-none
           prose-a:text-zinc-900 prose-a:dark:text-zinc-100 prose-a:underline
           prose-p:text-zinc-800 prose-p:dark:text-zinc-200
-          prose-headings:font-normal prose-headings:text-zinc-900 prose-headings:dark:text-zinc-100"
+          prose-headings:font-serif prose-headings:text-zinc-900 prose-headings:dark:text-zinc-100"
       >
         <MarkdownView content={parsedContent} />
       </div>

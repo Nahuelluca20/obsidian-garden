@@ -4,7 +4,7 @@ publishedAt: "2025-03-22"
 tags:
   - ai
   - llm
-summary: '"Explore MCP"'
+summary: Exploring How the Model Context protocol works, the new way to add context to an LLM model.
 ---
 
 The Model Context Protocol is a way tho standardizes how applications provide context to LLMs.
