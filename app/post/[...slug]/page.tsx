@@ -77,7 +77,6 @@ export default async function Post({
     .process(content);
 
   const parsedContent = markdownParser(processedContent.value.toString());
-
   const date = parseISO(frontmatter.publishedAt);
   const formatDate = format(date, "MMMM d, yyyy");
 

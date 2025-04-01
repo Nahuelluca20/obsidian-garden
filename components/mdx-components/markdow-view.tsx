@@ -4,6 +4,7 @@ import markdoc from "@markdoc/markdoc";
 import * as React from "react";
 import { Fence } from "./fence";
 import { Callout } from "./callout";
+import { BulletListItem } from "./bullet-list-item";
 
 type Props = {
   content: RenderableTreeNodes;
@@ -15,7 +16,7 @@ export function MarkdownView({ content }: Readonly<Props>) {
   return (
     <>
       {renderers.react(content, React, {
-        components: { Callout, Fence },
+        components: { Callout, Fence, BulletListItem },
       })}
     </>
   );
