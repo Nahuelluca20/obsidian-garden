@@ -26,6 +26,8 @@ export default async function Home({
     "teaching",
     "tools",
     "writing",
+    "books",
+    "tsq",
   ];
 
   const { topic } = await searchParams;
