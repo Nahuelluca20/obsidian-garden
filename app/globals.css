@@ -154,6 +154,14 @@
   margin-right: 0;
 }
 
+li > code {
+  @apply bg-stone-500 dark:bg-stone-700 p-1 rounded-md text-white italic;
+}
+
+p > code {
+  @apply bg-stone-500 dark:bg-stone-700 p-1 rounded-md text-white italic;
+}
+
 /* blockquote {
     @apply bg-zinc-50 dark:bg-zinc-900 my-6 border-l-2 px-4 py-3;
 } */
